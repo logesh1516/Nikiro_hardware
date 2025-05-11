@@ -51,5 +51,81 @@ source $HOME/.bashrc
 
 use the calibration firmware to find the motor rev and replace it in the firmware.
 
+# CALIBRATION
 
+Go to calibration folder and upload the firmware:
+```
+cd linorobot2_hardware/calibration
+pio run --target upload -e <your_teensy_board>
+```
+
+Available Teensy boards:
+
+teensy31
+
+teensy35
+
+teensy36
+
+teensy40
+
+teensy41
+
+type **spin** in the serial monitor to check the rotation of the motors.
+
+type **sample** in the serial motor to note the count per revolution of the motors.
+
+# MICRO-ROS
+
+**INSTALLATION**
+```
+# Source the ROS 2 installation
+source /opt/ros/$ROS_DISTRO/setup.bash
+
+# Create a workspace and download the micro-ROS tools
+mkdir microros_ws
+cd microros_ws
+git clone -b $ROS_DISTRO https://github.com/micro-ROS/micro_ros_setup.git src/micro_ros_setup
+
+# Update dependencies using rosdep
+sudo apt update && rosdep update
+rosdep install --from-paths src --ignore-src -y
+
+# Install pip
+sudo apt-get install python3-pip
+
+# Build micro-ROS tools and source them
+colcon build
+source install/local_setup.bash
+
+# Download micro-ROS agent packages
+ros2 run micro_ros_setup create_agent_ws.sh
+
+# Build step
+ros2 run micro_ros_setup build_agent.sh
+source install/local_setup.bash
+
+ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyACM0
+
+```
+
+# ROBOT OPERATION
+
+Run teleop_twist_keyboard package and follow the instructions on the terminal on how to drive the robot:
+```
+ros2 run teleop_twist_keyboard teleop_twist_keyboard 
+```
+Check the topics
+
+Check if the odom and IMU data are published:
+```
+ros2 topic list
+```
+Now you should see the following topics:
+
+/cmd_vel
+/imu/data
+/odom/unfiltered
+/parameter_events
+/rosout
 
