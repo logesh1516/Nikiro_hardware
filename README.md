@@ -50,7 +50,7 @@ This repo contains the **embedded firmware and hardware setup** for the physical
 
 <div align="center">
 
-![Inside Nikiro](https://github.com/user-attachments/assets/b1985cd6-d1f5-4c6a-a035-96975a60183b)
+<img src="https://github.com/user-attachments/assets/b1985cd6-d1f5-4c6a-a035-96975a60183b" width="480"/>
 
 </div>
 
